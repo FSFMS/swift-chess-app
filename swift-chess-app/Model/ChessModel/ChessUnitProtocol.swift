@@ -10,5 +10,7 @@ import Foundation
 protocol ChessUnitProtocol {
     var type: ChessUnitType { get }
     var playerFaction: PlayerFaction { get }
-    func movablePaths(_ currentChessPosition: ChessPosition, _ board: [[ChessUnitProtocol?]]) -> [ChessPosition]
+    var icon: String { get }
+    static var point: Int { get }
+    func movablePaths(_ currentChessPosition: ChessPosition) -> [ChessPosition]
 }

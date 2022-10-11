@@ -9,41 +9,32 @@ import Foundation
 
 struct Pawn: ChessUnitProtocol {
     let type: ChessUnitType = .Pawn
+    static var point: Int = 1
     let playerFaction: PlayerFaction
+    var icon: String { playerFaction == .Black ? "♟" : "♙" }
     
-    init(playerFaction: PlayerFaction) {
+    init(_ playerFaction: PlayerFaction) {
         self.playerFaction = playerFaction
     }
     
-    func movablePaths(_ currentChessPosition: ChessPosition, _ board: [[ChessUnitProtocol?]]) -> [ChessPosition] {
+    func movablePaths(_ currentChessPosition: ChessPosition) -> [ChessPosition] {
         // Pawn은 앞좌우 세 방향 가능
         
         var movablePaths = [ChessPosition]()
         
         // 앞 체크
         // 앞은 진영에 따라 달라지므로, 두개 다 체크.
-        if playerFaction == .Black, currentChessPosition.rankInt + 1 < ChessRule.boardSize {
-            if let chessPosition = ChessPosition(rank: currentChessPosition.rankInt + 1, file: currentChessPosition.fileInt) {
-                movablePaths.append(chessPosition)
-            }
-        } else if playerFaction == .White, currentChessPosition.rankInt - 1 >= 0 {
-            if let chessPosition = ChessPosition(rank: currentChessPosition.rankInt - 1, file: currentChessPosition.fileInt) {
-                movablePaths.append(chessPosition)
-            }
-            
+        if let moveFile = currentChessPosition.file + (playerFaction == .Black ? 1 : -1) {
+            movablePaths.append(ChessPosition(rank: currentChessPosition.rank, file: moveFile))
         }
-        // 왼쪽 체크
-        if currentChessPosition.fileInt - 1 >= 0 {
-            if let chessPosition = ChessPosition(rank: currentChessPosition.rankInt, file: currentChessPosition.fileInt - 1) {
-                movablePaths.append(chessPosition)
-            }
-            
+        
+        // 좌우 체크
+        if let moveRank = currentChessPosition.rank - 1 {
+            movablePaths.append(ChessPosition(rank: moveRank, file: currentChessPosition.file))
         }
-        // 오른쪽 체크
-        if currentChessPosition.fileInt + 1 < ChessRule.boardSize {
-            if let chessPosition = ChessPosition(rank: currentChessPosition.rankInt, file: currentChessPosition.fileInt + 1) {
-                movablePaths.append(chessPosition)
-            }
+        
+        if let moveRank = currentChessPosition.rank + 1 {
+            movablePaths.append(ChessPosition(rank: moveRank, file: currentChessPosition.file))
         }
         
         return movablePaths

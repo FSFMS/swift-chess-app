@@ -8,11 +8,17 @@
 import Foundation
 
 struct Knight: ChessUnitProtocol {
-    var type: ChessUnitType
+    let type: ChessUnitType = .Knight
+    static let point: Int = 3
     
-    var playerFaction: PlayerFaction
+    let playerFaction: PlayerFaction
+    var icon: String { playerFaction == .Black ? "♞" : "♘" }
     
-    func movablePaths(_ currentChessPosition: ChessPosition, _ board: [[ChessUnitProtocol?]]) -> [ChessPosition] {
+    init(_ playerFaction: PlayerFaction) {
+        self.playerFaction = playerFaction
+    }
+    
+    func movablePaths(_ currentChessPosition: ChessPosition) -> [ChessPosition] {
         var chessPositions = [ChessPosition]()
         
         let range = [ // 시계방향으로 범위 체크
@@ -23,11 +29,9 @@ struct Knight: ChessUnitProtocol {
         ]
         
         for position in range {
-            let rank = currentChessPosition.rankInt + position.0
-            let file = currentChessPosition.fileInt + position.1
-            
-            if let chessPosition = ChessPosition(rank: rank, file: file) {
-                chessPositions.append(chessPosition)
+            if let moveRank = currentChessPosition.rank + position.0,
+               let moveFile = currentChessPosition.file + position.1 {
+                chessPositions.append(ChessPosition(rank: moveRank, file: moveFile))
             }
         }
         

@@ -9,12 +9,13 @@ import Foundation
 
 struct Bishop: ChessUnitProtocol {
     let type: ChessUnitType = .Bishop
-    
+    static let point = 3
     let playerFaction: PlayerFaction
+    var icon: String { playerFaction == .Black ? "♝" : "♗" }
     
     init(_ playerFaction: PlayerFaction) { self.playerFaction = playerFaction }
     
-    func movablePaths(_ currentChessPosition: ChessPosition, _ board: [[ChessUnitProtocol?]]) -> [ChessPosition] {
-        return ChessUnitMovable.diagonal(currentChessPosition, board)
+    func movablePaths(_ currentChessPosition: ChessPosition) -> [ChessPosition] {
+        return ChessUnitMovable.diagonal(currentChessPosition).flatMap { $0 }
     }
 }

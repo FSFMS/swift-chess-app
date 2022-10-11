@@ -15,6 +15,9 @@
 		246F8C1128E1CFB300D2ECCE /* ChessRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246F8C1028E1CFB300D2ECCE /* ChessRule.swift */; };
 		246F8C1328E1DA8500D2ECCE /* ChessBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246F8C1228E1DA8500D2ECCE /* ChessBoard.swift */; };
 		247D3DDC28E6CFB400BC7529 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247D3DDB28E6CFB400BC7529 /* Error.swift */; };
+		24A7206128F130BF00CF52B5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 24A7206028F130BF00CF52B5 /* README.md */; };
+		24A7206328F136D600CF52B5 /* ChessPositionExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A7206228F136D600CF52B5 /* ChessPositionExpression.swift */; };
+		24A7206828F1425600CF52B5 /* ChessMovableTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A7206728F1425600CF52B5 /* ChessMovableTest.swift */; };
 		615B328528EAF133003AE8F2 /* Knight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615B328428EAF133003AE8F2 /* Knight.swift */; };
 		615B328728EAF13B003AE8F2 /* Bishop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615B328628EAF13B003AE8F2 /* Bishop.swift */; };
 		615B328928EAF142003AE8F2 /* Rook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615B328828EAF142003AE8F2 /* Rook.swift */; };
@@ -57,6 +60,9 @@
 		246F8C1028E1CFB300D2ECCE /* ChessRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessRule.swift; sourceTree = "<group>"; };
 		246F8C1228E1DA8500D2ECCE /* ChessBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessBoard.swift; sourceTree = "<group>"; };
 		247D3DDB28E6CFB400BC7529 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		24A7206028F130BF00CF52B5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		24A7206228F136D600CF52B5 /* ChessPositionExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessPositionExpression.swift; sourceTree = "<group>"; };
+		24A7206728F1425600CF52B5 /* ChessMovableTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessMovableTest.swift; sourceTree = "<group>"; };
 		615B328428EAF133003AE8F2 /* Knight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Knight.swift; sourceTree = "<group>"; };
 		615B328628EAF13B003AE8F2 /* Bishop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bishop.swift; sourceTree = "<group>"; };
 		615B328828EAF142003AE8F2 /* Rook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rook.swift; sourceTree = "<group>"; };
@@ -119,6 +125,7 @@
 				61D8E99328E022C000466138 /* ViewController.swift */,
 				247D3DDB28E6CFB400BC7529 /* Error.swift */,
 				615B328C28EB0310003AE8F2 /* ChessUnitMovable.swift */,
+				24A7206228F136D600CF52B5 /* ChessPositionExpression.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -169,6 +176,7 @@
 		61D8E98328E022C000466138 = {
 			isa = PBXGroup;
 			children = (
+				24A7206028F130BF00CF52B5 /* README.md */,
 				61D8E98E28E022C000466138 /* swift-chess-app */,
 				61D8E9A528E022C000466138 /* swift-chess-appTests */,
 				61D8E9AF28E022C000466138 /* swift-chess-appUITests */,
@@ -201,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				61D8E9A628E022C000466138 /* swift_chess_appTests.swift */,
+				24A7206728F1425600CF52B5 /* ChessMovableTest.swift */,
 			);
 			path = "swift-chess-appTests";
 			sourceTree = "<group>";
@@ -285,6 +294,7 @@
 					};
 					61D8E9A128E022C000466138 = {
 						CreatedOnToolsVersion = 14.0;
+						LastSwiftMigration = 1400;
 						TestTargetID = 61D8E98B28E022C000466138;
 					};
 					61D8E9AB28E022C000466138 = {
@@ -320,6 +330,7 @@
 			files = (
 				61D8E99C28E022C000466138 /* LaunchScreen.storyboard in Resources */,
 				61D8E99928E022C000466138 /* Assets.xcassets in Resources */,
+				24A7206128F130BF00CF52B5 /* README.md in Resources */,
 				61D8E99728E022C000466138 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,6 +369,7 @@
 				61D8E99028E022C000466138 /* AppDelegate.swift in Sources */,
 				246F8C0B28E1C29E00D2ECCE /* Pawn.swift in Sources */,
 				246F8C0D28E1C7CC00D2ECCE /* ChessUnitProtocol.swift in Sources */,
+				24A7206328F136D600CF52B5 /* ChessPositionExpression.swift in Sources */,
 				615B328D28EB0310003AE8F2 /* ChessUnitMovable.swift in Sources */,
 				61D8E99228E022C000466138 /* SceneDelegate.swift in Sources */,
 				246F8C1328E1DA8500D2ECCE /* ChessBoard.swift in Sources */,
@@ -369,6 +381,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				61D8E9A728E022C000466138 /* swift_chess_appTests.swift in Sources */,
+				24A7206828F1425600CF52B5 /* ChessMovableTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -591,15 +604,22 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = MPVU52NU49;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.herohjk.swift-chess-appTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/swift-chess-app.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/swift-chess-app";
@@ -611,11 +631,17 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = MPVU52NU49;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.herohjk.swift-chess-appTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -23,6 +23,23 @@ struct UnitRule {
     }
     
     struct StartPosition {
+        static func getChessPositions(chessUnitType: ChessUnitType, playerFaction: PlayerFaction) -> [ChessPosition] {
+            switch chessUnitType {
+            case .Pawn:
+                return pawn(playerFaction)
+            case .Knight:
+                return knight(playerFaction)
+            case .Bishop:
+                return bishop(playerFaction)
+            case .Rook:
+                return rook(playerFaction)
+            case .Queen:
+                return queen(playerFaction)
+            // TODO: King 추가 필요.
+            default: return [ChessPosition]()
+            }
+            
+        }
         /// 이 swift 파일은 룰에 관한 정의이므로 하드코딩을 할까, 논리적으로 풀까 고민을 조금 했습니다.
         /// 하지만 유닛(폰, 비숍, 룩, 나이트, 퀸, 킹)별로 일일히 하드코딩을 한다면 파일이 조금 지저분해질 까봐, 논리적으로 작성했습니다.
         static func pawn(_ playerFaction: PlayerFaction) -> [ChessPosition] {
@@ -72,21 +89,12 @@ struct UnitRule {
             return chessPositions
         }
         
-        static func Queen(_ playerFaction: PlayerFaction) -> ChessPosition {
+        static func queen(_ playerFaction: PlayerFaction) -> [ChessPosition] {
             let file = playerFaction == .Black ? ChessPosition.File.One : ChessPosition.File.Eight
             
-            return ChessPosition(rank: .E, file: file)
+            return [ChessPosition(rank: .E, file: file)]
         }
         
-    }
-    
-    struct Point {
-        static let none = 0
-        static let pawn = 1
-        static let bishop = 3
-        static let knight = 3
-        static let rook = 5
-        static let queen = 8
     }
 }
 

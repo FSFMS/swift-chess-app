@@ -8,114 +8,108 @@
 import Foundation
 
 /// 직선, 대각선을 위한 함수 모음
+/// 영어의 한계로 인해.. 8방향을 표현하기 위에 상하좌우가 아닌.. 동서남북(북서북동등..)으로 표현 했습니다 ㅡ,ㅡ
+/// 개발 하면서도 이게 맞는건가 싶은데.. 차주 미팅때 다른분들 의견을 좀 들어보겠습니다..
 struct ChessUnitMovable {
-    static func straight(_ currentPosition: ChessPosition, _ board: [[ChessUnitProtocol?]]) -> [ChessPosition] {
-        var chessPositions = [ChessPosition]()
-        
-        let rank = currentPosition.rankInt
-        let file = currentPosition.fileInt
-        
-        // 위쪽 체크
-        for i in (0 ..< file).reversed() {
-            if let chessPosition = ChessPosition(rank: rank, file: i) {
-                chessPositions.append(chessPosition)
+    static func straight(_ currentPosition: ChessPosition) -> [[ChessPosition]] {
+        var chessPositions = [[ChessPosition]]()
+
+        // 북쪽(?!) 체크
+        if let northFile = currentPosition.file - 1 {
+            var northChessPositions = [ChessPosition]()
+            for file in (ChessPosition.File.One ... northFile).reversed() {
+                northChessPositions.append(ChessPosition(rank: currentPosition.rank, file: file))
             }
             
-            if board[i][rank] != nil { break }
+            chessPositions.append(northChessPositions)
         }
         
-        // 아래쪽 체크
-        for i in (file + 1 ..< ChessRule.boardSize) {
-            if let chessPosition = ChessPosition(rank: rank, file: i) {
-                chessPositions.append(chessPosition)
+        // 남쪽 체크
+        if let southFile = currentPosition.file + 1 {
+            var southChessPositions = [ChessPosition]()
+            for file in (southFile ... ChessPosition.File.Eight) {
+                southChessPositions.append(ChessPosition(rank: currentPosition.rank, file: file))
             }
             
-            if board[i][rank] != nil { break }
+            chessPositions.append(southChessPositions)
         }
         
-        // 왼쪽 체크
-        for i in (0 ..< rank).reversed() {
-            if let chessPosition = ChessPosition(rank: i, file: file) {
-                chessPositions.append(chessPosition)
+        // 서쪽 체크
+        if let westRank = currentPosition.rank - 1 {
+            var westChessPositions = [ChessPosition]()
+            for rank in (ChessPosition.Rank.A ... westRank).reversed() {
+                westChessPositions.append(ChessPosition(rank: rank, file: currentPosition.file))
             }
             
-            if board[file][i] != nil { break }
+            chessPositions.append(westChessPositions)
         }
         
-        // 오른쪽 체크
-        for i in (rank + 1 ..< ChessRule.boardSize) {
-            if let chessPosition = ChessPosition(rank: i, file: file) {
-                chessPositions.append(chessPosition)
+        // 동쪽 체크
+        if let eastRank = currentPosition.rank + 1 {
+            var eastChessPositions = [ChessPosition]()
+            for rank in (eastRank ... ChessPosition.Rank.H) {
+                eastChessPositions.append(ChessPosition(rank: rank, file: currentPosition.file))
             }
             
-            if board[file][i] != nil { break }
+            chessPositions.append(eastChessPositions)
         }
         
         return chessPositions
     }
     
-    /// ChessPosition의 rank와 file은 추후 혹시 모를 상황을 대비해서 상수로 고정시켜 두었습니다.
-    /// 하지만 Movable 값을 구하는 경우 상수가 아닌 변수가 필요할 수 있는데요,
-    /// 그래서 임시로 타입을 정의합니다. 만약 이런 경우가 더 생긴다면, ChessPosition 자체를 수정할 필요가 있어 보입니다.
-    private typealias MovableChessPosition = (rank: Int, file: Int)
-    
-    static func diagonal(_ currentPosition: ChessPosition, _ board: [[ChessUnitProtocol?]]) -> [ChessPosition] {
-        var chessPositions = [ChessPosition]()
+    static func diagonal(_ currentPosition: ChessPosition) -> [[ChessPosition]] {
+        var chessPositions = [[ChessPosition]]()
         
-        // 왼쪽 위 체크
-        var position = MovableChessPosition(rank: currentPosition.rankInt - 1, file: currentPosition.fileInt - 1)
-        
-        while position.rank >= 0 && position.file >= 0 {
-            if let chessPosition = ChessPosition(rank: position.rank, file: position.file) {
-                chessPositions.append(chessPosition)
+        // 북서쪽 체크
+        if var rank = currentPosition.rank - 1,
+           var file = currentPosition.file - 1 {
+            var northWestChessPositions = [ChessPosition]()
+            while rank >= ChessPosition.Rank.A && file >= ChessPosition.File.One {
+                northWestChessPositions.append(ChessPosition(rank: rank, file: file))
+                
+                if !rank.move(-1) || !file.move(-1) { break }
             }
             
-            if board[position.file][position.rank] != nil { break }
-            
-            position.rank -= 1
-            position.file -= 1
+            chessPositions.append(northWestChessPositions)
         }
         
-        // 오른쪽 위 체크
-        position = MovableChessPosition(rank: currentPosition.rankInt - 1, file: currentPosition.fileInt + 1)
-        
-        while position.rank >= 0 && position.file < 8 {
-            if let chessPosition = ChessPosition(rank: position.rank, file: position.file) {
-                chessPositions.append(chessPosition)
+        // 북동쪽 체크
+        if var rank = currentPosition.rank + 1,
+           var file = currentPosition.file - 1 {
+            var northEastChessPositions = [ChessPosition]()
+            while rank <= ChessPosition.Rank.H && file >= ChessPosition.File.One {
+                northEastChessPositions.append(ChessPosition(rank: rank, file: file))
+                
+                if !rank.move(1) || !file.move(-1) { break }
             }
             
-            if board[position.file][position.rank] != nil { break }
-            
-            position.rank -= 1
-            position.file += 1
+            chessPositions.append(northEastChessPositions)
         }
         
-        // 왼쪽 아래 체크
-        position = MovableChessPosition(rank: currentPosition.rankInt + 1, file: currentPosition.fileInt - 1)
-        
-        while position.rank < 8 && position.file >= 0 {
-            if let chessPosition = ChessPosition(rank: position.rank, file: position.file) {
-                chessPositions.append(chessPosition)
+        // 남서쪽 체크
+        if var rank = currentPosition.rank - 1,
+           var file = currentPosition.file + 1 {
+            var southWestChessPositions = [ChessPosition]()
+            while rank >= ChessPosition.Rank.A && file <= ChessPosition.File.Eight {
+                southWestChessPositions.append(ChessPosition(rank: rank, file: file))
+                
+                if !rank.move(-1) || !file.move(1) { break }
             }
             
-            if board[position.file][position.rank] != nil { break }
-            
-            position.rank += 1
-            position.file -= 1
+            chessPositions.append(southWestChessPositions)
         }
-        
-        // 오른쪽 아래 체크
-        position = MovableChessPosition(rank: currentPosition.rankInt + 1, file: currentPosition.fileInt + 1)
-        
-        while position.rank < 8 && position.file < 8 {
-            if let chessPosition = ChessPosition(rank: position.rank, file: position.file) {
-                chessPositions.append(chessPosition)
+ 
+        // 남동쪽 체크
+        if var rank = currentPosition.rank + 1,
+           var file = currentPosition.file + 1 {
+            var southEastChessPositions = [ChessPosition]()
+            while rank <= ChessPosition.Rank.H && file <= ChessPosition.File.Eight {
+                southEastChessPositions.append(ChessPosition(rank: rank, file: file))
+                
+                if !rank.move(1) || !file.move(1) { break }
             }
             
-            if board[position.file][position.rank] != nil { break }
-            
-            position.rank += 1
-            position.file += 1
+            chessPositions.append(southEastChessPositions)
         }
         
         return chessPositions

@@ -19,7 +19,7 @@ struct ChessPosition: Equatable {
         case H = 7
     }
     
-    enum File: Int {
+    enum File: Int, Equatable {
         case One = 0
         case Two = 1
         case Three = 2
@@ -32,9 +32,6 @@ struct ChessPosition: Equatable {
     
     let rank: Rank
     let file: File
-    
-    var rankInt: Int { rank.rawValue }
-    var fileInt: Int { file.rawValue }
     
     var positionString: String {
         // 유니코드 변환의 경우는 아직 실패할 가능성을 못봤기 때문에, fatalError로 남겨두겠습니다.
@@ -90,5 +87,27 @@ struct ChessPosition: Equatable {
         guard let chessPosition = ChessPosition(lhs) else { return false }
         
         return chessPosition.rank == rhs.rank && chessPosition.file == rhs.file
+    }
+}
+
+extension ChessPosition.Rank {
+    mutating func move(_ distance: Int) -> Bool {
+        if self + distance == nil {
+            return false
+        } else {
+            self = (self + distance)!
+            return true
+        }
+    }
+}
+
+extension ChessPosition.File {
+    mutating func move(_ distance: Int) -> Bool {
+        if self + distance == nil {
+            return false
+        } else {
+            self = (self + distance)!
+            return true
+        }
     }
 }

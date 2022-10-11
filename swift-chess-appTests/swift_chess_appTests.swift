@@ -118,9 +118,9 @@ final class swift_chess_appTests: XCTestCase {
         XCTAssertEqual(ChessPosition("A1")?.positionString ?? "", "A1")
         
         XCTAssertTrue(ChessPosition("A1")! == "A1")
-        XCTAssertTrue("A1" == ChessPosition(rank: 0, file: 0))
-        XCTAssertFalse("A3" == ChessPosition(rank: 0, file: 0))
-        XCTAssertFalse("H8" == ChessPosition("A9") ?? ChessPosition(rank: -1, file: -1))
+//        XCTAssertTrue("A1" == ChessPosition(rank: 0, file: 0))
+//        XCTAssertFalse("A3" == ChessPosition(rank: 0, file: 0))
+//        XCTAssertFalse("H8" == ChessPosition("A9") ?? ChessPosition(rank: -1, file: -1))
     }
     
     // MARK: - Pawn 테스트
